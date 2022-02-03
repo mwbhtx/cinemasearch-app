@@ -1,0 +1,194 @@
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: black;
+}
+
+.nav-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    width: 100%;
+    height: 200px;
+    padding: 15px;
+    border-radius: 0 0 8px 8px;
+    color: white;
+}
+
+.banner-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+}
+
+.banner-leftside-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-weight: 1000;
+    font-size: 24px;
+    line-height: 24px;
+}
+
+
+.banner-rightside-content {
+    display: flex;
+    flex-direction: column;
+    text-transform: uppercase;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    position: relative;
+    width: 100%;
+}
+
+.search-input {
+    background-color: #F9F9F9;
+    border: none;
+    height: 45px;
+    width: 100%;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.submit-input {
+    position: absolute;
+    height: 40px;
+    width: 80px;
+    border: none;
+    background-color: #FF2828;
+    border-radius: 8px;
+    margin-right: 2px;
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.submit-input:hover {
+    background-color: #FF5A5A;
+}
+
+:focus {
+    outline: none;
+}
+
+.available-on-text {
+    font-weight: 800;
+    font-size: 3.5rem;
+    text-align: center;
+    margin: 25px;
+}
+
+.results-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    width: 100%;
+}
+
+
+.search-results-container {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    gap: 1em;
+    padding-bottom: 50px;
+}
+
+.search-result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    width: 300px;
+    border-radius: 10px;
+    padding-left: 15px;
+    padding-right: 25px;
+    transition: padding-right 0.2s ease-out;
+    border-width: 2px;
+    border-style: solid;
+
+}
+
+.search-result-item:hover {
+    padding-right: 15px;
+}
+
+
+#netflix-badge {
+    border-color: #E50914;
+    background-color: rgba(229, 9, 20, 0.08);
+    box-shadow: 0 3px 0 0 #E50914;
+    color: #E50914;
+}
+
+#hulu-badge {
+    border-color: #1CE783;
+    background-color: rgba(28, 231, 131, 0.08);
+    box-shadow: 0 3px 0 0 #1CE783;
+    color: #1CE783;
+}
+
+#hbomax-badge {
+    border-color: #691CE7;
+    background-color: rgba(105, 28, 231, 0.08);
+    box-shadow: 0 3px 0 0 #691CE7;
+    color: #691CE7;
+}
+
+#disneyplus-badge {
+    border-color: #101C50;
+    background-color: rgba(16, 28, 80, 0.08);
+    box-shadow: 0 3px 0 0 #101C50;
+    color: #101C50;
+}
+
+.footer-container {
+    display: flex;
+    height: 150px;
+    width: 100%;
+    background-color: black;
+    border-radius: 8px 8px 0 0;
+}
+
+.nav-links {
+    display: flex;
+    color: white;
+    min-width: 100px;
+    padding: 15px;
+}
+
+.nav-headline {
+    border-bottom: 3px solid #FF2828;
+}
+
+.nav-links > ul {   
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    list-style: none;   
+    font-size: 0.8em;
+}
+
+@media (max-width: 800px) {
+    .nav-container {
+        border-radius: 0;
+        margin: 0;
+    }
+}
