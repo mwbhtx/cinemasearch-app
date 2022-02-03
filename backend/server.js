@@ -14,8 +14,6 @@ app.use(cors());
 const port = process.env.PORT || 3002;
 const apiKey = process.env.WATCHMODE_API_KEY;
 
-console.log(apiKey);
-
 // setup get callback for '/' endpoint
 app.get(path = '/', (req, res) => {
     const returnMessage = `GET Request at path "${path}" successful.`;

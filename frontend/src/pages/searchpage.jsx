@@ -71,8 +71,8 @@ export default function SearchPage(props) {
 
             <footer className='footer-container'>
                 <nav className='nav-links'>
+                    <h4>NAVIGATION</h4>
                     <ul>
-                        <li className='nav-headline'>NAVIGATION</li>
                         <li>HOME</li>
                         <li>ABOUT</li>
                         <li>PROJECTS</li>

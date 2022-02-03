@@ -19,24 +19,6 @@ export const streamNetworks =
         "tmdb_id": 247
     },
     {
-        "id": 4,
-        "name": "SBS",
-        "origin_country": "KR",
-        "tmdb_id": 156
-    },
-    {
-        "id": 5,
-        "name": "DC Universe",
-        "origin_country": "US",
-        "tmdb_id": 2243
-    },
-    {
-        "id": 6,
-        "name": "Viceland",
-        "origin_country": "US",
-        "tmdb_id": 1339
-    },
-    {
         "id": 7,
         "name": "ABC",
         "origin_country": "US",
@@ -125,84 +107,6 @@ export const streamNetworks =
         "name": "USA Network",
         "origin_country": "US",
         "tmdb_id": 30
-    },
-    {
-        "id": 22,
-        "name": "WPVI-TV",
-        "origin_country": "US",
-        "tmdb_id": 409
-    },
-    {
-        "id": 23,
-        "name": "CBBC",
-        "origin_country": "GB",
-        "tmdb_id": 15
-    },
-    {
-        "id": 24,
-        "name": "ITV Granada",
-        "origin_country": "GB",
-        "tmdb_id": 89
-    },
-    {
-        "id": 25,
-        "name": "BBC",
-        "origin_country": null,
-        "tmdb_id": 7
-    },
-    {
-        "id": 26,
-        "name": "Associated Television",
-        "origin_country": "GB",
-        "tmdb_id": 117
-    },
-    {
-        "id": 27,
-        "name": "Magyar Televízió",
-        "origin_country": "HU",
-        "tmdb_id": 831
-    },
-    {
-        "id": 28,
-        "name": "CBC Television",
-        "origin_country": "CA",
-        "tmdb_id": 23
-    },
-    {
-        "id": 29,
-        "name": "Fuji TV",
-        "origin_country": "JP",
-        "tmdb_id": 1
-    },
-    {
-        "id": 30,
-        "name": "BBC Two",
-        "origin_country": "GB",
-        "tmdb_id": 332
-    },
-    {
-        "id": 31,
-        "name": "TBS",
-        "origin_country": "JP",
-        "tmdb_id": 160
-    },
-    {
-        "id": 32,
-        "name": "ARD",
-        "origin_country": "DE",
-        "tmdb_id": 308
-    },
-    {
-        "id": 33,
-        "name": "Nine Network",
-        "origin_country": "AU",
-        "tmdb_id": 66
-    },
-    {
-        "id": 34,
-        "name": "SVT1",
-        "origin_country": "SE",
-        "tmdb_id": 356
     },
     {
         "id": 35,
