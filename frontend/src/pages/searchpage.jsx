@@ -37,7 +37,7 @@ export default function SearchPage(props) {
                     </section>
                     <section className='banner-rightside-content'>
                         <h4>Seek and you shall find.</h4>
-                        <h4>Movies / TV Shows / Documentaries</h4>
+                        <h4>Movies, Shows, Documentaries.</h4>
                     </section>
                 </section>
                 <form className='form-container' onSubmit={onSubmitHandler}>

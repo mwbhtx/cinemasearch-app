@@ -42,7 +42,12 @@
 .banner-rightside-content {
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
     text-transform: uppercase;
+    margin-left: 35px;
+    text-align: right;
+    gap: 0.5em;
 }
 
 .form-container {
