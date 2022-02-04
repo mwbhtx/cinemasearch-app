@@ -74,11 +74,10 @@ nav {
 
 #nav-list > li {
     text-align: center;
-    padding: 5px;
     height: 100%;
     width: 100%;
     color: black;
-    padding: 5px;
+    padding: 10px;
     font-size: 14px;
     font-weight: 600;
 }
@@ -142,7 +141,6 @@ nav {
     border: none;
     height: 45px;
     padding-left: 15px;
-    border-radius: 8px;
     font-weight: 500;
     width: 100%;
 }
@@ -159,10 +157,6 @@ nav {
     width: 80px;
     border: none;
     background-color: #FF2828;
-    border-top-left-radius: 0;
-    border-top-right-radius: 5px;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 5px;
     color: white;
     font-weight: 700;
     
@@ -320,7 +314,7 @@ nav {
     text-align: center;
     padding: 1px;
     z-index: 1;
-    border: 1px solid white;
+    border: 5px solid white;
     border-radius: 15px;
 }
 

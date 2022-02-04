@@ -250,9 +250,7 @@ function MoviePoster(props) {
 
             {/* Service Icons Info Layer */}
             <section className={`poster-service-icons-container ${showServicesWindow ? 'active' : ''}`}>
-                <subtitle>
-                    <h6>{props.title}</h6>
-                </subtitle>
+                <h5>{props.title}</h5>
                 <h5 id='service-helper-text'>{serviceHelperText}</h5>
                 <section className='poster-services-list'>
 
