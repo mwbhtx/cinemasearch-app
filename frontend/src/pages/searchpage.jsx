@@ -223,19 +223,19 @@ function MoviePoster(props) {
             
             const servicesToShow = [];
 
+
             if (data != null) {
 
                 // check if streaming services returned are supported by our application
                 Object.keys(data).forEach( serviceIn => {
                     // if supported, append an html element to our services list
                     if (Object.keys(supportedStreamingServices).includes(serviceIn)) {
-                        servicesToShow.push(<StreamServiceIcon key={serviceIn} icon_url={supportedStreamingServices[serviceIn]}/>);
+                        servicesToShow.push(<StreamServiceIcon key={serviceIn} icon_url={supportedStreamingServices[serviceIn]} streamLink={data[serviceIn].us.link}/>);
                     }
                 })
             }
 
             setStreamingServiceHtmlElements(servicesToShow);
-
         }
         catch(error) {
             console.log(error);
@@ -246,7 +246,7 @@ function MoviePoster(props) {
 
     return (
         <>
-        <span className='poster-container'  onClick={fetchServicesAndToggleWindow}>
+        <span className='poster-container'>
 
             {/* Service Icons Info Layer */}
             <section className={`poster-service-icons-container ${showServicesWindow ? 'active' : ''}`}>
@@ -262,9 +262,9 @@ function MoviePoster(props) {
             </section>
 
             {/* Service Icons Info Button */}
-            <span id='poster-service-activate-icon' className="fa-stack fa-lg">
+            <span id='poster-service-activate-icon' className="fa-stack fa-lg"   onClick={fetchServicesAndToggleWindow}>
                 <i id='service-icon-background' className="fas fa-circle service-icon fa-stack-2x"></i>
-                <i className='fa fa-info-circle service-icon fa-stack-1x'/>
+                <i className={`fa ${showServicesWindow ? 'fa-times-circle' : 'fa-info-circle'} service-icon fa-stack-1x`}/>
             </span>
             
             {/* Poster Image */}
@@ -290,49 +290,10 @@ function StreamServiceIcon(props) {
 
     return (
         <>
-            <img className='poster-service-icon'  src={props.icon_url}></img>
+            <a id='service-badge-link' href={props.streamLink} target='_blank'>
+                <img className='poster-service-icon'  src={props.icon_url}></img>
+            </a>
         </>
     )
 }
 
-
-function AvailableStreams(props) {
-
-    return (
-            <section className='search-results-container'>
-
-                <h1 className='available-on-text'>AVAILABLE ON</h1>
-
-                <StreamServiceComponent
-                    id='netflix-badge'
-                    image={netflixImage} />
-
-                <StreamServiceComponent
-                    id='hulu-badge'
-                    image={huluImage} />
-
-                <StreamServiceComponent
-                    id='hbomax-badge'
-                    image={hboImage} />
-
-                <StreamServiceComponent
-                    id='disneyplus-badge'
-                    image={disneyImage} />
-                    
-            </section>
-    )
-}
-
-function StreamServiceComponent(props) {
-
-
-    return (
-
-        <>
-            <div id={props.id} className='search-result-item'>
-                <img src={props.image} />
-                <i className="fas fa-arrow-circle-right fa-2x"></i>
-            </div>
-        </>
-    )
-}
