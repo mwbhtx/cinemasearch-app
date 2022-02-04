@@ -12,8 +12,7 @@ dotenv.config();
 app.use(cors());
 
 // set listen port
-const port = process.env.PORT;
-const apiKey = process.env.WATCHMODE_API_KEY;
+const port = process.env.PORT || 8080;
 
 // initialize tmdb api config data
 tmdb.initializeTmdbConfig();

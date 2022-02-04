@@ -42,8 +42,7 @@ const supportedStreamingServices = {
     prime: prime_icon,
     apple: apple_icon,
 }
-
-const baseURL = 'http://localhost:' + process.env.REACT_APP_API_PORT + '/v1/';
+const baseURL = 'https://mwbhtx-cinemasearch-6k9ku.ondigitalocean.app/v1/';
 
 export default function SearchPage(props) {
 
@@ -167,6 +166,20 @@ function MoviePoster(props) {
     let [showServicesWindow, setShowServicesWindow] = useState(false);
     let [serviceHelperText, setServiceHelperText] = useState('LOADING...');
     let [streamingServiceHtmlElements, setStreamingServiceHtmlElements] = useState([]);
+
+    useEffect( () => {
+
+        console.log('checking streaming service elements');
+
+        if (noChachedData == false) {
+            if (streamingServiceHtmlElements.length) {
+                setServiceHelperText('AVAILABLE TO WATCH ON')
+            } else {
+                setServiceHelperText('NO STREAMING SERVICES FOUND');
+            }
+        }
+
+    }, [streamingServiceHtmlElements])
     
 
     const fetchServicesAndToggleWindow = () => {
@@ -207,9 +220,9 @@ function MoviePoster(props) {
                         servicesToShow.push(<StreamServiceIcon key={serviceIn} icon_url={supportedStreamingServices[serviceIn]}/>);
                     }
                 })
-                setStreamingServiceHtmlElements(servicesToShow);
-
             }
+
+            setStreamingServiceHtmlElements(servicesToShow);
 
         }
         catch(error) {
@@ -217,11 +230,6 @@ function MoviePoster(props) {
         }
 
 
-        if (streamingServiceHtmlElements.length) {
-            setServiceHelperText('AVAILABLE TO WATCH ON')
-        } else {
-            setServiceHelperText('NO STREAMING SERVICES FOUND');
-        }
     }
 
     return (
