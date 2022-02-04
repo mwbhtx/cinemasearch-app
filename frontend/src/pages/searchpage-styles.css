@@ -280,11 +280,12 @@ body {
     right: 0;
     bottom: 0;
     padding-bottom: 35px;
-    color: black;
+    color: white;
 }
 
 #service-icon-background {
-    color: white;
+    color: black;
+    opacity: 0.5;
 }
 .active {
     visibility: visible;

@@ -165,7 +165,9 @@ function MoviePoster(props) {
 
     let [noChachedData, setNoChachedData] = useState(true);
     let [showServicesWindow, setShowServicesWindow] = useState(false);
-    let [streamingInfoResponse, setstreamingInfoResponse] = useState([]);
+    let [serviceHelperText, setServiceHelperText] = useState('LOADING...');
+    let [streamingServiceHtmlElements, setStreamingServiceHtmlElements] = useState([]);
+    
 
     const fetchServicesAndToggleWindow = () => {
 
@@ -192,13 +194,33 @@ function MoviePoster(props) {
 
             const response = await axios(requestConfig);
 
-            const data = response.data;
+            const data = response.data.streamingInfo;
+            
+            const servicesToShow = [];
 
-            setstreamingInfoResponse(Object.keys(data.streamingInfo));
+            if (data != null) {
+
+                // check if streaming services returned are supported by our application
+                Object.keys(data).forEach( serviceIn => {
+                    // if supported, append an html element to our services list
+                    if (Object.keys(supportedStreamingServices).includes(serviceIn)) {
+                        servicesToShow.push(<StreamServiceIcon key={serviceIn} icon_url={supportedStreamingServices[serviceIn]}/>);
+                    }
+                })
+                setStreamingServiceHtmlElements(servicesToShow);
+
+            }
 
         }
         catch(error) {
             console.log(error);
+        }
+
+
+        if (streamingServiceHtmlElements.length) {
+            setServiceHelperText('AVAILABLE TO WATCH ON')
+        } else {
+            setServiceHelperText('NO STREAMING SERVICES FOUND');
         }
     }
 
@@ -206,31 +228,17 @@ function MoviePoster(props) {
         <>
         <span className='poster-container'  onClick={fetchServicesAndToggleWindow}>
             <section className={`poster-service-icons-container ${showServicesWindow ? 'active' : ''}`}>
-                <h5>available on</h5>
+                <h5>{serviceHelperText}</h5>
                 <section className='poster-services-list'>
-                    {/* <StreamServiceIcon icon_url={disney_icon}/>
-                    <StreamServiceIcon icon_url={netflix_icon}/>
-                    <StreamServiceIcon icon_url={hulu_icon}/>
-                    <StreamServiceIcon icon_url={hbo_icon}/>
-                    <StreamServiceIcon icon_url={prime_icon}/>
-                    <StreamServiceIcon icon_url={apple_icon}/> */}
 
                     {
-                        streamingInfoResponse.map( source => {
-
-                            console.log(`Checking if ${source} is supported...`);
-                            if (Object.keys(supportedStreamingServices).includes(source)) {
-                                console.log(`${source} is supported!`);
-                                return <StreamServiceIcon key={source} icon_url={supportedStreamingServices[source]}/>
-                            }
-                        })
-
+                        streamingServiceHtmlElements
                     }
 
                 </section>
             </section>
-            <span id='poster-service-activate-icon' class="fa-stack fa-lg">
-                <i id='service-icon-background' className="fas fa-circle service-icon fa-stack-1x"></i>
+            <span id='poster-service-activate-icon' className="fa-stack fa-lg">
+                <i id='service-icon-background' className="fas fa-circle service-icon fa-stack-2x"></i>
                 <i className='fa fa-info-circle service-icon fa-stack-1x'/>
             </span>
             

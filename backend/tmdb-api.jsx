@@ -155,9 +155,6 @@ async function fetchStreamData(req,res) {
 
     axios.request(options).then(function (response) {
 
-        // parse returned data : response.data
-        console.log();
-
         const clientResponse = {
             streamingInfo: response.data.streamingInfo,
         }
@@ -165,7 +162,8 @@ async function fetchStreamData(req,res) {
         res.send(clientResponse);
         
     }).catch(function (error) {
-        console.error(error);
+        console.log(error);
+        res.send(error);
     });
     
 }
