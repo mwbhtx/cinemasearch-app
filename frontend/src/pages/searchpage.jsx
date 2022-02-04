@@ -89,7 +89,6 @@ export default function SearchPage(props) {
 
     return (
         <div className='app-container'>
-
             <nav>
                 <span id='nav-button-container'  onClick={navMenuClickHandler}>
                    <i className={`fas fa-chevron-circle-up nav-button ${navMenuShown ? 'nav-button-active' : ''}`}/>
@@ -251,7 +250,7 @@ function MoviePoster(props) {
 
             {/* Service Icons Info Layer */}
             <section className={`poster-service-icons-container ${showServicesWindow ? 'active' : ''}`}>
-                <h5>{serviceHelperText}</h5>
+                <h5 id='service-helper-text'>{serviceHelperText}</h5>
                 <section className='poster-services-list'>
 
                     {
@@ -269,7 +268,7 @@ function MoviePoster(props) {
             
             {/* Poster Image */}
             {
-                props.image ? <img className='poster-image' src={props.image}/> : <FallBackPosterBackground title={props.title}/>
+                props.image ? <img className={`poster-image ${showServicesWindow ? 'blur-poster' : ''}`} src={props.image}/> : <FallBackPosterBackground title={props.title}/>
             }
            
         </span>

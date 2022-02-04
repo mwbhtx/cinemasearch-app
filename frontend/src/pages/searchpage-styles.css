@@ -271,8 +271,7 @@ nav {
     display: flex;
     position: relative;
     overflow: hidden;
-    border-radius: 5%;
-    background-color: #691CE7;
+    border-radius: 15px;
     max-width: 300px;
 }
 
@@ -280,6 +279,10 @@ nav {
 .poster-image {
     width: 100%;
     height: 100%;
+}
+
+.blur-poster {
+    filter: blur(5px);
 }
 
 .fallback-poster-background {
@@ -313,6 +316,7 @@ nav {
     text-transform: uppercase;
     text-align: center;
     padding: 1px;
+    z-index: 1;
 }
 
 #poster-service-activate-icon {
@@ -320,17 +324,26 @@ nav {
     margin: 0 auto;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: 15px;
     padding-bottom: 35px;
     color: white;
+    z-index: 2;
 }
 
 #service-icon-background {
     color: black;
     opacity: 0.5;
 }
+
 .active {
     visibility: visible;
+}
+
+#service-helper-text {
+    background-color: rgba(255,255,255, 0.1);
+    padding: 4%;
+    border-radius: 5px;
+    text-shadow: 0 3px black;
 }
 
 .poster-service-icon {
