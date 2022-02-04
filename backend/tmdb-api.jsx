@@ -95,8 +95,23 @@ function filterResponseData(response) {
     // convert data to an array
     const resultsArray = tmdbResultsToArray(response);
 
+    //
+    const filteredArray = tmdbFilterResultsArray(resultsArray);
+
+    // sort data by most votes
+    const resultsSortedByMostVotes = sortTmdbResultsArrayByMostVotes(resultsArray);
+
     // filter data
     return tmdbFilterResultsArray(resultsArray);
+
+}
+
+function sortTmdbResultsArrayByMostVotes(responseArray) {
+
+    // 
+    responseArray.sort( (firstItem, secondItem) => firstItem.vote_count >= secondItem.vote_count);
+    
+    return responseArray;
 
 }
 
