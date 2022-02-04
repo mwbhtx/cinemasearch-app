@@ -99,10 +99,10 @@ function filterResponseData(response) {
     const filteredArray = tmdbFilterResultsArray(resultsArray);
 
     // sort data by most votes
-    const resultsSortedByMostVotes = sortTmdbResultsArrayByMostVotes(resultsArray);
+    const resultsSortedByMostVotes = sortTmdbResultsArrayByMostVotes(filteredArray);
 
     // filter data
-    return tmdbFilterResultsArray(resultsArray);
+    return tmdbFilterResultsArray(resultsSortedByMostVotes);
 
 }
 
