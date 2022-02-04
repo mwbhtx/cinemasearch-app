@@ -53,6 +53,8 @@ export default function SearchPage(props) {
 
     const [mediaQueryResponse, setMediaQueryResponse] = useState([]);
 
+    const [navMenuShown, setNavMenuShown] = useState(false);
+
     const handleFormChange = e => {
         setFormValues(
             {
@@ -60,6 +62,11 @@ export default function SearchPage(props) {
                 [e.target.name]: e.target.value,
             }
         )
+    }
+
+    const navMenuClickHandler = e => {
+        console.log(`Menu Active: ${!navMenuShown}`);
+        setNavMenuShown(!navMenuShown);
     }
 
     const onSubmitHandler = async e => {
@@ -83,24 +90,31 @@ export default function SearchPage(props) {
     return (
         <div className='app-container'>
 
+            <nav>
+                <span id='nav-button-container'  onClick={navMenuClickHandler}>
+                   <i className={`fas fa-chevron-circle-up nav-button ${navMenuShown ? 'nav-button-active' : ''}`}/>
+                   <h4>NAVIGATION</h4>
+                </span>
+                <ul id='nav-list' className={`${navMenuShown ? 'show-nav-menu' : ''}`}>
+                    <li>HOME</li>
+                    <li>ABOUT</li>
+                    <li>PROJECTS</li>
+                    <li>CONTACT</li>
+                </ul>
+            </nav>
             <header className='header-grid'>
-
+            
                 {/* Column 1 */}
-                <nav className='header-col-1'>
-                    <ul id='nav-list'>
-                        <li><a>HOME</a></li>
-                        <li><a>ABOUT</a></li>
-                        <li><a>PROJECTS</a></li>
-                        <li><a>CONTACT</a></li>
-                    </ul>
-                </nav>
+                <div className='header-col-1'>
+                </div>
 
                 {/* Column 2 */}
 
                 <section className='header-col-2'>
+
                     <span className='header-headings'>
                         <h1>CINEMA<br />SEARCH</h1>
-                        <h4>Seek and you shall find.</h4>
+                        <h4>EMBRACE THE BINGE.</h4>
                     </span>
                     <form className='form-container' onSubmit={onSubmitHandler}>
                         <select id='type-input' type='text' name='query_type' value={formValues.query_type} onChange={handleFormChange}>
@@ -132,7 +146,6 @@ export default function SearchPage(props) {
             <footer id='footer-grid'>
                 <div id='footer-col-1'></div>
                 <div id='footer-col-2'> 
-                    <h5>lost in space</h5>
                     <i className="fas fa-user-astronaut"></i>
                     <h5>@the_lost_dev</h5>
                 </div>
@@ -169,8 +182,6 @@ function MoviePoster(props) {
 
     useEffect( () => {
 
-        console.log('checking streaming service elements');
-
         if (noChachedData == false) {
             if (streamingServiceHtmlElements.length) {
                 setServiceHelperText('AVAILABLE TO WATCH ON')
@@ -199,6 +210,8 @@ function MoviePoster(props) {
     const fetchServicesData = async () => {
 
         try {
+
+            console.log(`fetching service data for ${props.title}`);
 
             const uri = baseURL + 'streams/' + props.type + '/' + props.tmdb_id;
             const requestConfig = {
@@ -235,6 +248,8 @@ function MoviePoster(props) {
     return (
         <>
         <span className='poster-container'  onClick={fetchServicesAndToggleWindow}>
+
+            {/* Service Icons Info Layer */}
             <section className={`poster-service-icons-container ${showServicesWindow ? 'active' : ''}`}>
                 <h5>{serviceHelperText}</h5>
                 <section className='poster-services-list'>
@@ -245,11 +260,14 @@ function MoviePoster(props) {
 
                 </section>
             </section>
+
+            {/* Service Icons Info Button */}
             <span id='poster-service-activate-icon' className="fa-stack fa-lg">
                 <i id='service-icon-background' className="fas fa-circle service-icon fa-stack-2x"></i>
                 <i className='fa fa-info-circle service-icon fa-stack-1x'/>
             </span>
             
+            {/* Poster Image */}
             {
                 props.image ? <img className='poster-image' src={props.image}/> : <FallBackPosterBackground title={props.title}/>
             }
