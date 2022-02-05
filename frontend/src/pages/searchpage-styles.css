@@ -121,6 +121,7 @@ nav {
 
 .header-headings {
     display: flex;
+    position: relative;
     justify-content: space-between;
     text-transform: uppercase;
     margin-bottom: 15px;
@@ -129,6 +130,15 @@ nav {
 .header-headings > * {
     margin: 0;
     padding: 0;
+}
+
+.header-headings > h4 {
+    position: absolute;
+    margin: 0 auto;
+    right: 0;
+    left: 0;
+    top: 50px;
+    width: 180px;
 }
 
 .search-submit-container {
@@ -332,8 +342,9 @@ nav {
 
 #service-icon-background {
     color: black;
-    opacity: 0.5;
+    opacity: 0.8;
 }
+
 
 .active {
     visibility: visible;
@@ -392,7 +403,6 @@ nav {
     
 
     nav {
-        margin: 15px;
         overflow: hidden;
     }
 
@@ -423,7 +433,7 @@ nav {
         flex-direction: column;
         grid-template-columns: 1fr;
         justify-items: center;
-        margin: 15px;
+        margin: 0 15px 15px 15px; 
     }
 
     .header-col-2 {
@@ -436,7 +446,7 @@ nav {
     }
 
     .header-headings > h4 {
-        display: none;
+        top: 80px;
     }
 
 
