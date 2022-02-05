@@ -408,6 +408,7 @@ nav {
 
     .header-subtitle {
         position: relative;
+        margin: 30px auto;
     }
 
     #nav-button-container > h4 {
