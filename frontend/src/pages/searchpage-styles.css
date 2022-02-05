@@ -38,8 +38,6 @@ nav {
 
 .nav-button {
     display: none;
-    position: absolute;
-    left: 0;
     transition: all 0.5s ease;
 }
 
@@ -50,7 +48,7 @@ nav {
 
 
 #nav-button-container {
-    display: flex;
+    display: none;
     position: relative;
     justify-content: center;
     align-items: center;
@@ -134,11 +132,12 @@ nav {
 
 .header-headings > h4 {
     position: absolute;
+    text-align: center;
     margin: 0 auto;
     right: 0;
     left: 0;
     top: 50px;
-    width: 180px;
+    width: 250px;
 }
 
 .search-submit-container {
@@ -170,6 +169,7 @@ nav {
     background-color: #FF2828;
     color: white;
     font-weight: 700;
+    border-radius: none;
     
 }
 
@@ -328,7 +328,6 @@ nav {
     border: 5px solid white;
     border-radius: 15px;
 }
-
 #poster-service-activate-icon {
     position: absolute;
     margin: 0 auto;
@@ -392,20 +391,27 @@ nav {
 @media (max-width: 550px) {
 
 
-    .show-nav-menu > * {
-        display: none;
-    }
-    
 
     #nav-button-container > h4 {
         display: block;
     }
     
+    #nav-list * {
+        display: none;
+    }
+
+
+    .show-nav-menu * {
+        display: flex !important;
+    }
 
     nav {
         overflow: hidden;
     }
 
+    #nav-button-container { 
+        display: flex;
+    }
     .nav-button {
         display: inline-block;
         padding: 10px;
@@ -414,18 +420,14 @@ nav {
 
     #nav-list {
         flex-direction: column;
-        margin-bottom: 15px;
         background-color: transparent;
+        background-color: whitesmoke;
     }
 
     #nav-list > li {
         justify-content: center;
         align-items: center;
-        border-radius: 5px;
-        padding: 5px 0;
-        border: 1px solid white;
-        margin: 5px 0;
-        color: white;
+        padding: 10px 0;
     }
 
     .header-grid {
@@ -446,7 +448,7 @@ nav {
     }
 
     .header-headings > h4 {
-        top: 80px;
+        top: 100px;
     }
 
 

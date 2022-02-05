@@ -4,12 +4,6 @@ import { useEffect, useState } from 'react';
 
 import axios from 'axios';
 
-// import asset images
-import netflixImage from '../assets/images/netflix.svg';
-import huluImage from '../assets/images/hulu.svg';
-import hboImage from '../assets/images/hbomax.svg';
-import disneyImage from '../assets/images/disneyplus.svg';
-
 import netflix_icon from '../assets/images/netflix_icon.webp';
 import disney_icon from '../assets/images/disney_icon.webp';
 import hbo_icon from '../assets/images/hbo_icon.webp';
@@ -55,6 +49,8 @@ export default function SearchPage(props) {
 
     const [navMenuShown, setNavMenuShown] = useState(false);
 
+    const [userRequestedTitle, setUserRequestedTitle] = useState(false);
+
     const handleFormChange = e => {
         setFormValues(
             {
@@ -65,25 +61,32 @@ export default function SearchPage(props) {
     }
 
     const navMenuClickHandler = e => {
-        console.log(`Menu Active: ${!navMenuShown}`);
         setNavMenuShown(!navMenuShown);
     }
 
     const onSubmitHandler = async e => {
         e.preventDefault();
 
-        const uri = baseURL + formValues.query_type;
-        const requestConfig = {
-            url: uri,
-            params: formValues,
+        if (!userRequestedTitle) {
+            setUserRequestedTitle(true);    
         }
 
-        try {
-            const response = await axios(requestConfig);
-            setMediaQueryResponse(response.data);
-        }
-        catch (e) {
-            console.log(e);
+        const searchQuery = formValues.query;
+        const uri = baseURL + formValues.query_type;
+
+        if (searchQuery.length > 0) {
+            const requestConfig = {
+                url: uri,
+                params: formValues,
+            }
+    
+            try {
+                const response = await axios(requestConfig);
+                setMediaQueryResponse(response.data);
+            }
+            catch (e) {
+                console.log(e);
+            }
         }
     }
 
@@ -92,7 +95,9 @@ export default function SearchPage(props) {
             <nav>
                 <span id='nav-button-container'  onClick={navMenuClickHandler}>
                    <i className={`fas fa-chevron-circle-up nav-button ${navMenuShown ? 'nav-button-active' : ''}`}/>
-                   <h4>NAVIGATION</h4>
+                   <a src='/'>
+                        <h4>NAVIGATION</h4>
+                   </a>
                 </span>
                 <ul id='nav-list' className={`${navMenuShown ? 'show-nav-menu' : ''}`}>
                     <li>HOME</li>
@@ -112,7 +117,7 @@ export default function SearchPage(props) {
                 <section className='header-col-2'>
 
                     <span className='header-headings'>
-                        <h1>CINEMA<br />SEARCH</h1>
+                        <h2>CINEMA<br />SEARCH</h2>
                         <h4>EMBRACE THE BINGE.</h4>
                     </span>
                     <form className='form-container' onSubmit={onSubmitHandler}>
@@ -132,6 +137,8 @@ export default function SearchPage(props) {
 
             <section id='mid-content-grid'>
                 <div id='mid-content-banner'/>
+
+
                 {/* <AvailableStreams/> */}
                 
                 <MoviePosterGallery 

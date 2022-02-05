@@ -10,3 +10,12 @@
 :root {
     --font-family-roboto: 'roboto';
 }
+
+
+h1 {
+  font-size: 58px;
+}
+
+h2 {
+  font-size: 32px;
+}
