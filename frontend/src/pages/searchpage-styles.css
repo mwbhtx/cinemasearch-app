@@ -86,7 +86,6 @@ nav {
 
 .form-container {
     display: flex;
-    margin-top: 50px;
 }
 
 #mid-content-grid {
@@ -120,24 +119,35 @@ nav {
 .header-headings {
     display: flex;
     position: relative;
-    justify-content: space-between;
+    align-items: flex-end;
     text-transform: uppercase;
     margin-bottom: 15px;
 }
 
-.header-headings > * {
+.header-headings * {
     margin: 0;
     padding: 0;
 }
 
-.header-headings > h4 {
+.header-site-name {
+    display: flex;
+    align-self: flex-start;
+}
+
+.header-subtitle {
+    display: flex;
     position: absolute;
+    flex-direction: column;
     text-align: center;
+    color: white;
+    width: 100%;
     margin: 0 auto;
-    right: 0;
-    left: 0;
-    top: 50px;
-    width: 250px;
+    gap: 3px;
+    width: 100%;
+}
+
+.header-subtitle * {
+    padding: 0;
 }
 
 .search-submit-container {
@@ -388,9 +398,17 @@ nav {
     }
 }
 
-@media (max-width: 550px) {
 
+@media (max-width: 700px) {
+        
 
+    .header-headings {
+        flex-direction: column;
+    }
+
+    .header-subtitle {
+        position: relative;
+    }
 
     #nav-button-container > h4 {
         display: block;
@@ -446,11 +464,6 @@ nav {
         flex-direction: column;
         gap: 15px;
     }
-
-    .header-headings > h4 {
-        top: 100px;
-    }
-
 
     #type-input {
         width: 100%;

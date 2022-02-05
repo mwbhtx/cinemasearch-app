@@ -117,8 +117,13 @@ export default function SearchPage(props) {
                 <section className='header-col-2'>
 
                     <span className='header-headings'>
-                        <h2>CINEMA<br />SEARCH</h2>
-                        <h4>EMBRACE THE BINGE.</h4>
+                        <span className='header-site-name'>
+                            <h2>CINEMA<br/>SEARCH</h2>
+                        </span> 
+                        <span className='header-subtitle'>
+                            <h4>FIND A SHOW OR MOVIE TITLE.</h4>
+                            <h4>EMBRACE THE BINGE.</h4>
+                        </span>
                     </span>
                     <form className='form-container' onSubmit={onSubmitHandler}>
                         <select id='type-input' type='text' name='query_type' value={formValues.query_type} onChange={handleFormChange}>
@@ -137,7 +142,6 @@ export default function SearchPage(props) {
 
             <section id='mid-content-grid'>
                 <div id='mid-content-banner'/>
-
 
                 {/* <AvailableStreams/> */}
                 
