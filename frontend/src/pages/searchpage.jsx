@@ -36,11 +36,11 @@ const supportedStreamingServices = {
     prime: prime_icon,
     apple: apple_icon,
 }
-const baseURL = 'https://mwbhtx-cinemasearch-6k9ku.ondigitalocean.app/v1/';
+const baseURL = 'https://mwbhtx-cinemasearch-6k9ku.ondigitalocean.app/v1/multi';
 
 export default function SearchPage(props) {
 
-    const endpoint = process.env.REACT_APP_LOCALHOST || baseURL;
+    const endpoint = process.env.REACT_APP_LOCALHOST_MULTI || baseURL;
 
     const [formValues, setFormValues] = useState({
         query: '',
@@ -78,7 +78,7 @@ export default function SearchPage(props) {
 
         if (searchQuery.length > 0) {
             const requestConfig = {
-                url: process.env.REACT_APP_LOCALHOST + 'multi',
+                url: endpoint,
                 params: formValues,
             }
     
