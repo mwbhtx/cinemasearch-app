@@ -36,11 +36,11 @@ const supportedStreamingServices = {
     prime: prime_icon,
     apple: apple_icon,
 }
-const baseURL = 'https://mwbhtx-cinemasearch-6k9ku.ondigitalocean.app/v1/multi';
+const digitalOceanEndpoint = 'https://mwbhtx-cinemasearch-6k9ku.ondigitalocean.app/v1/';
+
+const endpoint = process.env.REACT_APP_LOCALHOST_MULTI || digitalOceanEndpoint;
 
 export default function SearchPage(props) {
-
-    const endpoint = process.env.REACT_APP_LOCALHOST_MULTI || baseURL;
 
     const [formValues, setFormValues] = useState({
         query: '',
@@ -74,16 +74,14 @@ export default function SearchPage(props) {
         }
 
         const searchQuery = formValues.query;
-        const uri = baseURL + formValues.query_type;
 
         if (searchQuery.length > 0) {
             const requestConfig = {
-                url: endpoint,
+                url: endpoint + 'multi',
                 params: formValues,
             }
     
             try {
-                console.log(`Requesting data at ${requestConfig.url}`);
                 const response = await axios(requestConfig);
                 setMediaQueryResponse(response.data);
             }
@@ -130,7 +128,7 @@ export default function SearchPage(props) {
                     </span>
                     <form className='form-container' onSubmit={onSubmitHandler}>
                         <span className='search-submit-container'>
-                            <input id='search-input' type='text' placeholder='eg: Mr Robot' name='query' value={formValues.query} onChange={handleFormChange} />
+                            <input id='search-input' type='text' placeholder='search for a movie or tv show' name='query' value={formValues.query} onChange={handleFormChange} />
                             <input id='submit-input' type='submit' value='search' />
                         </span>
                     </form>
@@ -220,23 +218,19 @@ function MoviePoster(props) {
 
         try {
 
-            console.log(`fetching service data for ${props.title}`);
-
-            const uri = baseURL + 'streams/' + props.type + '/' + props.tmdb_id;
+            const uri = endpoint + 'streams/' + props.type + '/' + props.tmdb_id;
             const requestConfig = {
                 url: uri
             }
 
             const response = await axios(requestConfig);
 
-            const data = response.data.streamingInfo;
+            const data = response.data;
             
             const servicesToShow = [];
 
 
             if (data != null) {
-
-                console.log(data);
 
                 // check if streaming services returned are supported by our application
                 Object.keys(data).forEach( serviceIn => {

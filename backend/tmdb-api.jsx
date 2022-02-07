@@ -178,18 +178,18 @@ async function fetchStreamData(req,res) {
         }
     };
 
-    axios.request(options).then(function (response) {
+    try {
 
-        const clientResponse = {
-            streamingInfo: response.data.streamingInfo,
-        }
+        const response = await axios(options);
 
-        return clientResponse;
+        console.log(JSON.stringify(response.data.streamingInfo, null, 2));
         
-    }).catch(function (error) {
+        return response.data.streamingInfo;
+    }
+    catch (error) {
         return error;
-    });
-    
+    }
+
 }
 
 async function fetchMultiMediaTypeData(req) {
