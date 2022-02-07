@@ -26,11 +26,8 @@ function initializeTmdbConfig() {
     })
     .then( response => {
         tmdbConfigurationData = response.data;
-        console.log('Successfully loaded TMDB configuration data on startup.');
     })
     .catch( error => {
-        // fatal error
-        console.log('Error fetching TMDB configuration data on startup.');
         console.log(error);
     })
 
@@ -64,6 +61,7 @@ function buildCinemaSearchTVResponseObject(resultsArray) {
             title: obj.name,
             image_url: obj.poster_path ? (tmdbConfigurationData.images.secure_base_url+tmdbConfigurationData.images.poster_sizes[4]+obj.poster_path) : null,
             tmdb_id: obj.id,
+            vote_count: obj.vote_count,
             type: 'tv',
         }
     })
@@ -83,6 +81,7 @@ function buildCinemaSearchMovieResponseObject(resultsArray) {
             title: obj.title,
             image_url: obj.poster_path ? (tmdbConfigurationData.images.secure_base_url+tmdbConfigurationData.images.poster_sizes[4]+obj.poster_path) : null,
             tmdb_id: obj.id,
+            vote_count: obj.vote_count,
             type: 'movie',
         }
     })
@@ -98,24 +97,29 @@ function filterResponseData(response) {
     //
     const filteredArray = tmdbFilterResultsArray(resultsArray);
 
-    // sort data by most votes
-    const resultsSortedByMostVotes = sortTmdbResultsArrayByMostVotes(filteredArray);
-
     // filter data
-    return tmdbFilterResultsArray(resultsSortedByMostVotes);
+    return tmdbFilterResultsArray(filteredArray);
 
 }
 
 function sortTmdbResultsArrayByMostVotes(responseArray) {
 
-    // 
-    responseArray.sort( (firstItem, secondItem) => firstItem.vote_count >= secondItem.vote_count);
-    
+    responseArray.sort( (firstItem, secondItem) => {
+
+        if (firstItem.vote_count > secondItem.vote_count) {
+            return -1;
+        } if (firstItem.vote_count < secondItem.vote_count) {
+            return 1;
+        } else {
+            return 0;
+        }
+    });
+
     return responseArray;
 
 }
 
-async function fetchMovieData(req,res) {
+async function fetchMovieData(req) {
 
     try {
        
@@ -127,16 +131,19 @@ async function fetchMovieData(req,res) {
     
         // build client json response
         const cinemaSearchResponseBody = buildCinemaSearchMovieResponseObject(filteredResponse);
+
+        // sort response by most votes
+        sortTmdbResultsArrayByMostVotes(cinemaSearchResponseBody);
         
         // send data to client
-        res.send(cinemaSearchResponseBody);
+        return cinemaSearchResponseBody;
     }
     catch (error) {
-        res.send(error);
+        return error;
     }
 }
 
-async function fetchTvData(req, res) {
+async function fetchTvData(req) {
 
     try {
         // fetch tmdb response
@@ -148,11 +155,14 @@ async function fetchTvData(req, res) {
         // build client json response
         const cinemaSearchResponseBody = buildCinemaSearchTVResponseObject(filteredResponse);
 
+        // sort response by most votes
+        sortTmdbResultsArrayByMostVotes(cinemaSearchResponseBody);
+
         // send data to client
-        res.send(cinemaSearchResponseBody);
+        return cinemaSearchResponseBody;
     }
     catch (error) {
-        res.send(error);
+        return error;
     }
 }
 
@@ -174,15 +184,29 @@ async function fetchStreamData(req,res) {
             streamingInfo: response.data.streamingInfo,
         }
 
-        res.send(clientResponse);
+        return clientResponse;
         
     }).catch(function (error) {
-        console.log(error);
-        res.send(error);
+        return error;
     });
     
 }
 
+async function fetchMultiMediaTypeData(req) {
+
+    const tvResponse = await fetchTvData(req);
+
+    const movieResponse = await fetchMovieData(req);
+
+    const clientResponse = tvResponse.concat(movieResponse); 
+
+    sortTmdbResultsArrayByMostVotes(clientResponse);
+
+    return clientResponse;
+    
+}
+
+module.exports.fetchMultiMediaTypeData = fetchMultiMediaTypeData;
 module.exports.initializeTmdbConfig = initializeTmdbConfig;
 module.exports.fetchMovieData = fetchMovieData;
 module.exports.fetchTvData = fetchTvData;

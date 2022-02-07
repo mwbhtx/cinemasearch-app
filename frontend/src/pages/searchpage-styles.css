@@ -28,6 +28,8 @@ body {
 .header-col-2 {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 nav {
@@ -86,6 +88,8 @@ nav {
 
 .form-container {
     display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 #mid-content-grid {
@@ -119,15 +123,12 @@ nav {
 .header-headings {
     display: flex;
     position: relative;
-    align-items: flex-end;
+    align-items: center;
     text-transform: uppercase;
     margin-bottom: 15px;
+    width: 100%;
 }
 
-.header-headings * {
-    margin: 0;
-    padding: 0;
-}
 
 .header-site-name {
     display: flex;
@@ -135,12 +136,12 @@ nav {
 }
 
 .header-subtitle {
-    display: flex;
     position: absolute;
+    left: 0;
+    display: flex;
     flex-direction: column;
     text-align: center;
     color: white;
-    width: 100%;
     margin: 0 auto;
     gap: 3px;
     width: 100%;
@@ -148,6 +149,7 @@ nav {
 
 .header-subtitle * {
     padding: 0;
+    margin: 0;
 }
 
 .search-submit-container {
@@ -163,11 +165,14 @@ nav {
     padding-left: 15px;
     font-weight: 500;
     width: 100%;
+    color: black;
+    border-radius: 0;
 }
 
 #type-input {
     width: 150px;
     margin-right: 15px;
+    border-radius: 0;
 }
 
 #submit-input {
@@ -179,7 +184,8 @@ nav {
     background-color: #FF2828;
     color: white;
     font-weight: 700;
-    border-radius: none;
+    border-radius: 0;
+    -webkit-border-radius: 0;
     
 }
 
@@ -463,7 +469,6 @@ nav {
 
     .form-container {
         flex-direction: column;
-        gap: 15px;
     }
 
     #type-input {

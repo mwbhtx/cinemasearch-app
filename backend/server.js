@@ -17,30 +17,24 @@ const port = process.env.PORT || 8080;
 // initialize tmdb api config data
 tmdb.initializeTmdbConfig();
 
-// setup get callback for '/' endpoint
-app.get(path = '/', (req, res) => {
-    let returnMessage = `GET Request at path "${path}" successful.\n`;
-    returnMessage += `Queries Received: ${JSON.stringify(req.query)}`;
-    console.log(returnMessage);
-    res.send(returnMessage);
+// setup movie request endpoint
+app.get('/v1/movie', async (req,res) => {
+    res.send(await tmdb.fetchMovieData(req));
 })
 
 // setup movie request endpoint
-app.get('/v1/movie', (req,res) => {
-    console.log('Movie Search Requested.');
-    tmdb.fetchMovieData(req,res);
+app.get('/v1/tv', async (req,res) => {
+    res.send(await tmdb.fetchTvData(req));
 })
 
 // setup movie request endpoint
-app.get('/v1/tv', (req,res) => {
-    console.log('TV Search Requested.');
-    tmdb.fetchTvData(req,res);
+app.get('/v1/streams/:type/:id', async (req,res) => {
+    res.send(await tmdb.fetchStreamData(req));
 })
 
-// setup movie request endpoint
-app.get('/v1/streams/:type/:id', (req,res) => {
-    console.log('Streaming Services Requested.');
-    tmdb.fetchStreamData(req,res);
+// endpoint to search same title in both tv & movie categories
+app.get('/v1/multi', async (req, res) => {
+    res.send(await tmdb.fetchMultiMediaTypeData(req));
 })
 
 // spin up express server

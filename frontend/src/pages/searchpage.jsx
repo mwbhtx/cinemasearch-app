@@ -40,6 +40,8 @@ const baseURL = 'https://mwbhtx-cinemasearch-6k9ku.ondigitalocean.app/v1/';
 
 export default function SearchPage(props) {
 
+    const endpoint = process.env.REACT_APP_LOCALHOST || baseURL;
+
     const [formValues, setFormValues] = useState({
         query: '',
         query_type: 'movie',
@@ -76,11 +78,12 @@ export default function SearchPage(props) {
 
         if (searchQuery.length > 0) {
             const requestConfig = {
-                url: uri,
+                url: process.env.REACT_APP_LOCALHOST + 'multi',
                 params: formValues,
             }
     
             try {
+                console.log(`Requesting data at ${requestConfig.url}`);
                 const response = await axios(requestConfig);
                 setMediaQueryResponse(response.data);
             }
@@ -126,10 +129,6 @@ export default function SearchPage(props) {
                         </span>
                     </span>
                     <form className='form-container' onSubmit={onSubmitHandler}>
-                        <select id='type-input' type='text' name='query_type' value={formValues.query_type} onChange={handleFormChange}>
-                            <option value='movie'>Movie</option>
-                            <option value='tv'>TV</option>
-                        </select>
                         <span className='search-submit-container'>
                             <input id='search-input' type='text' placeholder='eg: Mr Robot' name='query' value={formValues.query} onChange={handleFormChange} />
                             <input id='submit-input' type='submit' value='search' />
@@ -236,6 +235,8 @@ function MoviePoster(props) {
 
 
             if (data != null) {
+
+                console.log(data);
 
                 // check if streaming services returned are supported by our application
                 Object.keys(data).forEach( serviceIn => {
